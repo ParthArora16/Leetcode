@@ -27,7 +27,6 @@ public:
                     v.push_back(ar[j]);
                     s1.insert({ar[i], {ar[k], ar[j]}});
                     fans.push_back(v);
-                    v.clear();
                 }
                 k++;
             }
