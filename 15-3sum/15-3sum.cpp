@@ -29,8 +29,9 @@ public:
                     fans.push_back(v);
                 }
                 k++;
+                j--;
             }
-            if (ar[k] + ar[j] > target)
+            else if (ar[k] + ar[j] > target)
             {
 
                 j--;
