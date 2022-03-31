@@ -16,10 +16,7 @@ public:
         {
             if (ar[k] + ar[j] == target)
             {
-                if (s1.count({ar[i], {ar[k], ar[j]}}) > 0)
-                {
-                }
-                else
+                if (s1.count({ar[i], {ar[k], ar[j]}}) == 0)
                 {
                     vector<int> v;
                     v.push_back(ar[i]);
@@ -27,6 +24,7 @@ public:
                     v.push_back(ar[j]);
                     s1.insert({ar[i], {ar[k], ar[j]}});
                     fans.push_back(v);
+                    v.clear();
                 }
                 k++;
                 j--;
@@ -45,4 +43,5 @@ public:
     }
     return fans;
 }
+
 };
