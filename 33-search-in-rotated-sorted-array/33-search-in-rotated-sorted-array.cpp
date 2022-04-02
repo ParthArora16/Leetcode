@@ -13,27 +13,23 @@ public:
         {
             return mid;
         }
-        if (ar[mid] >= ar[i])
+        else if (target > ar[mid] && target <= ar[j])
         {
-            if (target >= ar[i] && target <= ar[mid])
-            {
-                j = mid - 1;
-            }
-            else
-            {
-                i = mid + 1;
-            }
+            // right part is definately sorted
+            i = mid + 1;
+        }
+        else if (target >= ar[i] && target < ar[mid])
+        {
+            // left part will definately sorted
+            j = mid - 1;
+        }
+        else if (ar[i] > ar[mid])
+        {
+            j = mid - 1;
         }
         else
         {
-            if (target >= ar[mid] && target <= ar[j])
-            {
-                i = mid + 1;
-            }
-            else
-            {
-                j = mid - 1;
-            }
+            i = mid + 1;
         }
     }
     return -1;
