@@ -13,10 +13,9 @@ public:
 {
     int i = 0;
     int j = n;
-    int mid = 0;
     while (i <= j)
     {
-        mid = i + (j - i)/2;
+        int mid = i + (j - i)/2;
         if (guess(mid) == 0)
         {
             return mid;
