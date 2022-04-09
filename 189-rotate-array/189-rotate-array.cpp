@@ -1,26 +1,21 @@
 class Solution {
 public:
-    void rotate(vector<int> &ar, int k)
+   void reversearray(vector<int> &ar, int si, int ei)
 {
-    int n = ar.size();
-    if(n <= 1)
+    while (si <= ei)
     {
-        return;    
+        swap(ar[si], ar[ei]);
+        si++;
+        ei--;
     }
+}
+
+void rotate(vector<int> &nums, int k)
+{
+    int n = nums.size();
     k = k % n;
-    int *arr = new int[n];
-    int si = 0;
-    for (int i = n - k; i < n; i++)
-    {
-        arr[si++] = ar[i];
-    }
-    for (int i = 0; i < n - k; i++)
-    {
-        arr[si++] = ar[i];
-    }
-    for (int i = 0; i < n; i++)
-    {
-        ar[i] = arr[i];
-    }
+    reversearray(nums, 0, n - 1);
+    reversearray(nums, 0, k - 1);
+    reversearray(nums, k, n - 1);
 }
 };
