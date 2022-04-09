@@ -1,21 +1,19 @@
 class Solution {
 public:
-    int peakIndexInMountainArray(vector<int> &ar)
+   int peakIndexInMountainArray(vector<int> &ar)
 {
-    int size = ar.size();
-    int start = 0, end = size - 1, mid, num;
-    while (start <= end)
+    int n = ar.size();
+    int i = 0, j = n - 1, mid, num;
+    while (i <= j)
     {
-        mid = start + (end - start) / 2;
+        mid = i + (j - i) / 2;
         num = ar[mid];
-
-        // Main body of the binary search.
         if (num > ar[mid + 1] && num > ar[mid - 1])
             return mid;
         else if (num < ar[mid + 1])
-            start = mid + 1;
+            i = mid + 1;
         else
-            end = mid - 1;
+            j = mid - 1;
     }
     return -1;
 }
