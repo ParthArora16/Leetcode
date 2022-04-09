@@ -9,11 +9,18 @@ public:
     {
         int mid = i + (j - i) / 2;
         if (ar[mid] > ar[mid + 1] && ar[mid] > ar[mid - 1])
+        {
+
             return mid;
+        }
         else if (ar[mid] < ar[mid + 1])
+        {
             i = mid + 1;
+        }
         else
+        {
             j = mid - 1;
+        }
     }
     return -1;
 }
