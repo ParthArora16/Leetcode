@@ -7,10 +7,9 @@ public:
     while (i <= j)
     {
         mid = i + (j - i) / 2;
-        num = ar[mid];
-        if (num > ar[mid + 1] && num > ar[mid - 1])
+        if (ar[mid] > ar[mid + 1] && ar[mid] > ar[mid - 1])
             return mid;
-        else if (num < ar[mid + 1])
+        else if (ar[mid] < ar[mid + 1])
             i = mid + 1;
         else
             j = mid - 1;
