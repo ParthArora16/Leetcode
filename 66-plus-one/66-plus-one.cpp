@@ -2,9 +2,12 @@ class Solution {
 public:
     vector<int> plusOne(vector<int> &digits)
 {
-    int carry = 1;
-    int n = digits.size();
-    int i = n - 1;
+    int carry = 1 , n = digits.size() , i = n - 1;
+    if (digits[i] < 9)
+    {
+        digits[i]++;
+        return digits;
+    }
     while (i >= 0)
     {
         int sum = digits[i] + carry;
