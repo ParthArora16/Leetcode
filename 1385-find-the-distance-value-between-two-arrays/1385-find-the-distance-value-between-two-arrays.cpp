@@ -6,8 +6,17 @@ int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
     {
         bool flag = false;
         for(int j=0;j<m;j++)
-            if(abs(arr1[i]-arr2[j]) <= d)   flag = true;
-        if(!flag)   count++;
+        {
+            if(abs(arr1[i]-arr2[j]) <= d)
+            {
+                   flag = true;
+            }
+        }
+            
+        if(flag == false)
+        {
+            count++;  
+        }   
     }
     return count;     
 }
