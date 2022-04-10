@@ -1,17 +1,29 @@
 class Solution {
 public:
-    int findclosest(vector<int> &ar, int target)
+    // this fun() will return closest distance of target from sorted array ar
+int findclosest(vector<int> &ar, int target)
 {
-    int ans = INT_MAX;
-    int n = ar.size();
-    for (int i = 0; i < n; i++)
+    int n = ar.size(), i = 0, j = n - 1;
+    int pos = INT_MAX;
+    while (i <= j)
     {
-        if (abs(target - ar[i]) < ans)
+        int mid = i + (j - i) / 2;
+        if (ar[mid] == target)
         {
-            ans = abs(target - ar[i]);
+            return 0;
+        }
+        else if (target < ar[mid])
+        {
+            pos = min(abs(target - ar[mid]), pos);
+            j = mid - 1;
+        }
+        else
+        {
+            pos = min(abs(target - ar[mid]), pos);
+            i = mid + 1;
         }
     }
-    return ans;
+    return pos;
 }
 
 // this fun() will return final ans
