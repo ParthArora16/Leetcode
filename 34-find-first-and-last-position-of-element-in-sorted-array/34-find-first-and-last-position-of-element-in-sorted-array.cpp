@@ -24,7 +24,7 @@ public:
             }
             else
             {
-                if (mid + 1 <= j && ar[mid + 1] == target)
+                if (mid + 1 <= n - 1 && ar[mid + 1] == target)
                 {
                     i = mid + 1;
                 }
