@@ -7,18 +7,17 @@ public:
     {
         mymap[ar[i]]++;
     }
-    vector<int> ans;
     int count = 0;
     int i = 1;
     while (count < k)
     {
         if (mymap.count(i) == 0)
         {
-            ans.push_back(i);
             count++;
         }
         i++;
     }
-    return ans[k - 1];
+    return i - 1;
 }
+
 };
