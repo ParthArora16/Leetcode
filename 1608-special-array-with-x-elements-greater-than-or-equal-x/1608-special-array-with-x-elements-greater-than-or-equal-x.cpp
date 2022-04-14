@@ -24,8 +24,8 @@ int specialArray(vector<int> &ar)
             map[ar[i]] = n - i;
         }
     }
-    int x = 0;
-    while (x++ <= n)
+    int x = 1;
+    while (x <= n)
     {
         if (map.count(x) == 1)
         {
@@ -42,6 +42,7 @@ int specialArray(vector<int> &ar)
                 return x;
             }
         }
+        x++;
     }
     return -1;
 }
