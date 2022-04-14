@@ -16,7 +16,8 @@ public:
         mymap1[s1[i]]++;
     }
     map<char, int> mymap2;
-    for (int i = 0; i < s1.length(); i++)
+       int n = s1.length();
+    for (int i = 0; i < n; i++)
     {
         mymap2[s2[i]]++;
     }
