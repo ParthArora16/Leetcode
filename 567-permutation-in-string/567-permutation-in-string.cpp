@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool checkInclusion(string s1, string s2, unordered_map<char, int> &map1)
+   bool checkInclusion(string s1, string s2)
 {
     if (s1.length() == 0)
     {
@@ -10,28 +10,46 @@ public:
     {
         return false;
     }
-    unordered_map<char, int> mymap;
-    int i = 0;
-    while (i < s1.size())
+    map<char, int> mymap1;
+    for (int i = 0; s1[i] != '\0'; i++)
     {
-        mymap[s2[i]]++;
-        i++;
+        mymap1[s1[i]]++;
     }
-    if (map1 == mymap)
+    map<char, int> mymap2;
+    for (int i = 0; i < s1.length(); i++)
+    {
+        mymap2[s2[i]]++;
+    }
+    if (mymap1 == mymap2)
     {
         return true;
     }
-    return checkInclusion(s1, s2.substr(1), map1);
-}
-
-bool checkInclusion(string s1, string s2)
-{
-    unordered_map<char, int> map1;
-    for (int i = 0; s1[i] != '\0'; i++)
+    int si = 0;
+    mymap2[s2[si]]--;
+    if (mymap2[s2[si]] == 0)
     {
-        map1[s1[i]]++;
+        mymap2.erase(s2[si]);
     }
-    return checkInclusion(s1, s2, map1);
+    si++;
+    int i = s1.length();
+    while (s2[i] != '\0')
+    {
+        mymap2[s2[i]]++;
+        if (mymap1 == mymap2)
+        {
+            return true;
+        }
+        else
+        {
+            mymap2[s2[si]]--;
+            if (mymap2[s2[si]] == 0)
+            {
+                mymap2.erase(s2[si]);
+            }
+            si++;
+        }
+        i++;
+    }
+    return false;
 }
-
 };
