@@ -29,10 +29,7 @@ public:
         }
     }
     int result = ar[ar.size() - 1];
-    while (missed++ < k)
-    {
-        result++;
-    }
-    return result;
+    result += k - missed;
+        return result;
 }
 };
