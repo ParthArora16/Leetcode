@@ -11,11 +11,10 @@ public:
     int i = 1;
     while (count < k)
     {
-        if (mymap.count(i) == 0)
+        if (mymap.count(i++) == 0)
         {
             count++;
         }
-        i++;
     }
     return i - 1;
 }
