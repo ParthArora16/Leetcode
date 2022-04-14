@@ -1,6 +1,6 @@
 class Solution {
 public:
-   bool checkInclusion(string s1, string s2)
+    bool checkInclusion(string s1, string s2)
 {
     if (s1.length() == 0)
     {
@@ -10,12 +10,12 @@ public:
     {
         return false;
     }
-    map<char, int> mymap1;
+    unordered_map<char, int> mymap1;
     for (int i = 0; s1[i] != '\0'; i++)
     {
         mymap1[s1[i]]++;
     }
-    map<char, int> mymap2;
+    unordered_map<char, int> mymap2;
     for (int i = 0; i < s1.length(); i++)
     {
         mymap2[s2[i]]++;
