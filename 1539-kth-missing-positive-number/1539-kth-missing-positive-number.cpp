@@ -2,21 +2,37 @@ class Solution {
 public:
     int findKthPositive(vector<int> &ar, int k)
 {
-    unordered_map<int, int> mymap;
+    int missed = 0;
     for (int i = 0; i < ar.size(); i++)
     {
-        mymap[ar[i]]++;
-    }
-    int count = 0;
-    int i = 1;
-    while (count < k)
-    {
-        if (mymap.count(i++) == 0)
+        if (i == 0)
         {
-            count++;
+            missed += ar[0] - 1;
+            if (missed >= k)
+            {
+                return k;
+            }
+        }
+        else
+        {
+            missed += ar[i] - ar[i - 1] - 1;
+            if (missed >= k)
+            {
+                missed -= ar[i] - ar[i - 1] - 1;
+                int result = ar[i - 1];
+                while (missed++ < k)
+                {
+                    result++;
+                }
+                return result;
+            }
         }
     }
-    return i - 1;
+    int result = ar[ar.size() - 1];
+    while (missed++ < k)
+    {
+        result++;
+    }
+    return result;
 }
-
 };
