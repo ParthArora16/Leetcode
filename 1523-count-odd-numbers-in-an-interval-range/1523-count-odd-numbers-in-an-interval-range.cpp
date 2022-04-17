@@ -2,25 +2,11 @@ class Solution {
 public:
     int countOdds(int low, int high)
 {
-    int count = 0;
-    if (low % 2 != 0)
+    int ans = (high - low) / 2;
+    if (low % 2 != 0 || high % 2 != 0)
     {
-        while (low <= high)
-        {
-            low += 2;
-            count++;
-        }
-        return count;
+        ans++;
     }
-    else
-    {
-        low += 1;
-        while (low <= high)
-        {
-            count++;
-            low += 2;
-        }
-    }
-    return count;
+    return ans;
 }
 };
