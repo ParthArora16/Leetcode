@@ -10,6 +10,7 @@ public:
             low += 2;
             count++;
         }
+        return count;
     }
     else
     {
