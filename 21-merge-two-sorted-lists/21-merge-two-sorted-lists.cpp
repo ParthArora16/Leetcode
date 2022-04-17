@@ -50,7 +50,7 @@ public:
                 ft->next = list2;
                 ft = ft->next;
             }
-                        list2 = list2->next;
+        list2 = list2->next;
 
         }
     }
