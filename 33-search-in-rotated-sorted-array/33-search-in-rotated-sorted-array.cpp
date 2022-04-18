@@ -1,35 +1,37 @@
 class Solution {
 public:
-    int search(vector<int> &ar, int target)
+    int search(vector<int> &nums, int target)
 {
-    int n = ar.size();
     int i = 0;
-    int j = n - 1;
-    int mid = 0;
+    int j = nums.size() - 1;
     while (i <= j)
     {
-        mid = (i + j) / 2;
-        if (ar[mid] == target)
+        int mid = (i + j)/ 2;
+        if (nums[mid] == target)
         {
             return mid;
         }
-        else if (target > ar[mid] && target <= ar[j])
+        if (nums[i] <= nums[mid])
         {
-            // right part is definately sorted
-            i = mid + 1;
-        }
-        else if (target >= ar[i] && target < ar[mid])
-        {
-            // left part will definately sorted
-            j = mid - 1;
-        }
-        else if (ar[i] > ar[mid])
-        {
-            j = mid - 1;
+            if (target >= nums[i] && target <= nums[mid])
+            {
+                j = mid - 1;
+            }
+            else
+            {
+                i = mid + 1;
+            }
         }
         else
         {
-            i = mid + 1;
+            if (target >= nums[mid] && target <= nums[j])
+            {
+                i = mid + 1;
+            }
+            else
+            {
+                j = mid - 1;
+            }
         }
     }
     return -1;
