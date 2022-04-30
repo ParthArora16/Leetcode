@@ -3,17 +3,17 @@ public:
     vector<int> twoSum(vector<int> &ar, int target)
 {
     unordered_map<int, int> mymap;
-    vector<int> v;
     for (int i = 0; i < ar.size(); i++)
     {
         if (mymap.count(target - ar[i]) > 0)
         {
-            v.push_back(mymap[target - ar[i]]);
-            v.push_back(i);
+            ar.resize(2,10);
+            ar[0] = mymap[target - ar[i]];
+            ar[1] = i;
             break;
         }
         mymap[ar[i]] = i;
     }
-    return v;
+    return ar;
 }
 };
