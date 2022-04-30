@@ -7,7 +7,7 @@ public:
     {
         if (mymap.count(target - ar[i]) > 0)
         {
-            ar.resize(2,10);
+            ar.resize(2);
             ar[0] = mymap[target - ar[i]];
             ar[1] = i;
             break;
