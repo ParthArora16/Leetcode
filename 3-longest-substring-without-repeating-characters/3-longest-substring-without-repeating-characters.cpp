@@ -1,36 +1,28 @@
 class Solution {
 public:
-   int lengthOfLongestSubstring(string s, int n)
+    int lengthOfLongestSubstring(string s)
 {
-    // if (n == 1 || n == 1)
-    // {
-    //     return n;
-    // }
-    int i = 0, j = 0, ans = 0;
-    unordered_set<char> set1;
+    unordered_set<char> s1;
+    int i = 0, j = 0;
+    int n = s.length();
+    int ans = 0;
     while (j < n)
     {
-        if (set1.count(s[j]) == 0)
+        if (s1.count(s[j]) == 0)
         {
-            set1.insert(s[j]);
-            ans = max(j - i + 1, ans);
+            ans = max(ans, j - i + 1);
+            s1.insert(s[j]);
             j++;
         }
         else
         {
-            while (set1.count(s[j]) == 1)
+            while (s1.count(s[j]) != 0)
             {
-                set1.erase(s[i]);
+                s1.erase(s[i]);
                 i++;
             }
         }
     }
     return ans;
-}
-
-int lengthOfLongestSubstring(string s)
-{
-    int n = s.length();
-    return lengthOfLongestSubstring(s, n);
 }
 };
