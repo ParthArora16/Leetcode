@@ -10,79 +10,53 @@
  */
 class Solution {
 public:
-   ListNode *addTwoNumbers(ListNode *head1, ListNode *head2)
+    ListNode *addTwoNumbers(ListNode *head1, ListNode *head2)
 {
-    ListNode *temp1 = head1;
-    ListNode *temp2 = head2;
-
-    ListNode *fh = NULL;
-    ListNode *ft = NULL;
-
+    ListNode *temp1 = head1, *temp2 = head2;
     int carry = 0;
-
+    ListNode *fh = head1;
+    ListNode *ft = temp1;
     while (temp1 != NULL && temp2 != NULL)
     {
-        int sum = temp1->val + temp2->val + carry;
-        int put = sum % 10;
-        carry = sum / 10;
-        ListNode *newnode = new ListNode(put);
-        if (fh == NULL)
+        int data = temp1->val + temp2->val + carry;
+        carry = data / 10;
+        temp1->val = data % 10;
+        temp2->val = data % 10;
+        if (temp1->next == NULL)
         {
-            fh = newnode;
-            ft = newnode;
-        }
-        else
-        {
-            ft->next = newnode;
-            ft = ft->next;
+            ft = temp1;
         }
         temp1 = temp1->next;
         temp2 = temp2->next;
     }
-
     while (temp1 != NULL)
     {
-        int sum = temp1->val + carry;
-        int put = sum % 10;
-        carry = sum / 10;
-        ListNode *newnode = new ListNode(put);
-        if (fh == NULL)
+        int data = temp1->val + carry;
+        temp1->val = data % 10;
+        carry = data / 10;
+        if (temp1->next == NULL)
         {
-            fh = newnode;
-            ft = newnode;
-        }
-        else
-        {
-            ft->next = newnode;
-            ft = ft->next;
+            fh = head1;
+            ft = temp1;
         }
         temp1 = temp1->next;
     }
-
     while (temp2 != NULL)
     {
-        int sum = temp2->val + carry;
-        int put = sum % 10;
-        carry = sum / 10;
-        ListNode *newnode = new ListNode(put);
-        if (fh == NULL)
+        int data = temp2->val + carry;
+        temp2->val = data % 10;
+        carry = data / 10;
+        if (temp2->next == NULL)
         {
-            fh = newnode;
-            ft = newnode;
-        }
-        else
-        {
-            ft->next = newnode;
-            ft = ft->next;
+            fh = head2;
+            ft = temp2;
         }
         temp2 = temp2->next;
     }
-
     if (carry > 0)
     {
         ListNode *newnode = new ListNode(carry);
         ft->next = newnode;
-        ft = newnode;
     }
     return fh;
 }
