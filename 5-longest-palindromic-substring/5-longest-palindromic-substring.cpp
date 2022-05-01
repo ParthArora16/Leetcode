@@ -9,7 +9,35 @@ public:
     int count = 0;
     for (int k = 0; k < n - 1; k++)
     {
-        count = 0;
+        int i = k - 1;
+        int j = k + 1;
+        count = 1;
+        if (count > ans)
+        {
+            ans = count;
+            fsi = k;
+            fei = k;
+        }
+        while (i >= 0 && j < n)
+        {
+            if (s[i] == s[j])
+            {
+                count += 2;
+            }
+            else
+            {
+                break;
+            }
+            i--;
+            j++;
+        }
+        if (count > ans)
+        {
+            ans = count;
+            fsi = i + 1;
+            fei = j - 1;
+        }
+
         if (s[k] == s[k + 1])
         {
             count = 2;
@@ -40,34 +68,6 @@ public:
                 fsi = i + 1;
                 fei = j - 1;
             }
-        }
-        int i = k - 1;
-        int j = k + 1;
-        count = 1;
-        if (count > ans)
-        {
-            ans = count;
-            fsi = k;
-            fei = k;
-        }
-        while (i >= 0 && j < n)
-        {
-            if (s[i] == s[j])
-            {
-                count += 2;
-            }
-            else
-            {
-                break;
-            }
-            i--;
-            j++;
-        }
-        if (count > ans)
-        {
-            ans = count;
-            fsi = i + 1;
-            fei = j - 1;
         }
     }
     return s.substr(fsi, fei - fsi + 1);
