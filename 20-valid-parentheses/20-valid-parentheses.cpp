@@ -1,31 +1,31 @@
 class Solution {
 public:
-    bool isOpenBracket(char ch){
-        if(ch == '(' || ch == '{' || ch == '[')
-            return true;
-        return false;
-    }
-    bool isValidPair(char open, char close){
-        if(open == '(' && close == ')')
-            return true;
-        else if(open == '{' && close == '}')
-            return true;
-        else if(open == '[' && close == ']')
-            return true;
-        return false;
-    }
-    bool isValid(string s) {
-        stack<char> st;
-        int len = s.length();
-        for(int i=0;i<len;++i){
-            if(isOpenBracket(s[i])){
-                st.push(s[i]);
-            }else if( !st.empty() && isValidPair(st.top(), s[i])){
-                st.pop();
-            }else{
-                return false;   
+    
+bool isValid(string s)
+{
+    stack<char> s1;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+        {
+            s1.push(s[i]);
+        }
+        else
+        {
+            if (s1.empty())
+            {
+                return false;
+            }
+            if ((s1.top() == '(' && s[i] == ')') || (s1.top() == '[' && s[i] == ']') || (s1.top() == '{' && s[i] == '}'))
+            {
+                s1.pop();
+            }
+            else
+            {
+                return false;
             }
         }
-            return st.empty();
     }
+    return s1.empty();
+}
 };
