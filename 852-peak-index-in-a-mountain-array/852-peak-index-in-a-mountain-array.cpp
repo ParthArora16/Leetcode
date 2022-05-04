@@ -6,7 +6,7 @@ public:
     while (i <= j)
     {
         mid = i + (j - i) / 2;
-        if ((ar[mid] > ar[mid + 1]) && (ar[mid] > ar[mid - 1]))
+        if (ar[mid + 1] < ar[mid] && ar[mid - 1] < ar[mid])
         {
             return mid;
         }
