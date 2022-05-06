@@ -1,33 +1,31 @@
 class Solution {
 public:
-    char nextGreatestLetter(vector<char> &s, char target)
+   char nextGreatestLetter(vector<char> &ar, char target)
 {
-    int n = s.size(), i = 0, j = n - 1;
-    char poss = s[0];
+    int i = 0, j = ar.size() - 1, mid = 0;
+    int ans = 0;
     while (i <= j)
     {
-        int mid = i + (j - i) / 2;
-        if (s[mid] == target)
+        int mid = (i + j) / 2;
+        if (ar[mid] == target)
         {
-            if (mid + 1 <= n - 1)
-            {
-                i = mid + 1;
-            }
-            else
-            {
-                return s[0];
-            }
+            ans = mid + 1;
+            i = mid + 1;
         }
-        else if (target > s[mid])
+        else if (ar[mid] < target)
         {
             i = mid + 1;
         }
         else
         {
-            poss = s[mid];
+            ans = mid;
             j = mid - 1;
         }
     }
-    return poss;
+    if (ans >= 0 && ans < ar.size())
+    {
+        return ar[ans];
+    }
+    return ar[0];
 }
 };
