@@ -6,7 +6,7 @@ public:
     int ans = 0;
     while (i <= j)
     {
-        int mid = (i + j) / 2;
+        mid = (i + j) / 2;
         if (ar[mid] == target)
         {
             ans = mid + 1;
