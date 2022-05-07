@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>> combinationSum(vector<int> &ar, int si, int ei, int target, vector<int> &ans, int sum)
+    vector<vector<int>> combinationSum(vector<int> &ar, int si, int ei, int target, vector<int> ans, int sum)
 {
     if (si > ei)
     {
