@@ -1,52 +1,18 @@
 class Solution {
 public:
-    void Merge(vector<int> &ar, int si, int ei)
+    vector<int> sortArray(vector<int> &nums)
 {
-    int i = si;
-    int mid = (si + ei) / 2;
-    int j = mid + 1;
-    int n = ei - si + 1;
-    int arr[100000];
-    int k = si;
-    while (i <= mid && j <= ei)
+    priority_queue<int , vector<int> , greater<int>> pq;
+    for (int i = 0; i < nums.size(); i++)
     {
-        if (ar[i] < ar[j])
-        {
-            arr[k++] = ar[i++];
-        }
-        else
-        {
-            arr[k++] = ar[j++];
-        }
+        pq.push(nums[i]);
     }
-    while (i <= mid)
+    int i = 0;
+    while (!pq.empty())
     {
-        arr[k++] = ar[i++];
+        nums[i++] = pq.top();
+        pq.pop();
     }
-    while (j <= ei)
-    {
-        arr[k++] = ar[j++];
-    }
-    for (int i = si; i <= ei; i++)
-    {
-        ar[i] = arr[i];
-    }
-}
-
-void MergeSort(vector<int> &ar, int si, int ei)
-{
-    if (si >= ei)
-    {
-        return;
-    }
-    MergeSort(ar, si, (si + ei) / 2);
-    MergeSort(ar, (si + ei) / 2 + 1, ei);
-    Merge(ar, si, ei);
-}
-
-vector<int> sortArray(vector<int> &nums)
-{
-    MergeSort(nums, 0, nums.size() - 1);
     return nums;
 }
 };
