@@ -1,47 +1,43 @@
 class Solution {
 public:
-    vector<vector<int>> combinationSum(vector<int> &ar, int si, int ei, int target, vector<int> &ans, int sum)
-{
-    if (si > ei)
-    {
-        vector<vector<int>> v;
-        return v;
-    }
 
-    if (sum > target)
+    void Sum(vector<int>& candidates, int target, vector<vector<int> >& res, vector<int>& r, int i)
     {
-        vector<vector<int>> v;
-        return v;
-    }
-
-    if (sum == target)
-    {
-        vector<vector<int>> v;
-        v.push_back(ans);
-        return v;
-    }
-
-    vector<vector<int>> ans1 = combinationSum(ar, si + 1, ei, target, ans, sum);
-    ans.push_back(ar[si]);
-    vector<vector<int>> ans2 = combinationSum(ar, si, ei, target, ans, sum + ar[si]);
-
-    vector<vector<int>> fans;
-    for (int i = 0; i < ans1.size(); i++)
-    {
-        fans.push_back(ans1[i]);
-    }
-    for (int i = 0; i < ans2.size(); i++)
-    {
-        fans.push_back(ans2[i]);
-    }
-    ans.pop_back();
-    return fans;
+        
+        if(target == 0)
+        {
+            // if we get exact answer
+            res.push_back(r);
+            return;
+        }
+        
+        while(i <  candidates.size() && target - candidates[i] >= 0)
+        {
+            // Till every element in the array starting
+            // from i which can contribute to the target
+            r.push_back(candidates[i]);// add them to vector
+            
+            // recur for next numbers
+            Sum(candidates,target - candidates[i],res,r,i);
+            ++i;
+            
+            // Remove number from vector (backtracking)
+            r.pop_back();
+        }
 }
-
-vector<vector<int>> combinationSum(vector<int> &ar, int target)
-{
-    int n = ar.size();
-    vector<int> ans;
-    return combinationSum(ar, 0, n - 1, target, ans, 0);
-}
+    
+     
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end()); // sort candidates array
+        
+        // remove duplicates
+        candidates.erase(unique(candidates.begin(),candidates.end()),candidates.end());
+        
+        vector<int> r;
+        vector<vector<int> > res;
+        
+        Sum(candidates,target,res,r,0);
+        
+        return res;
+    }
 };
