@@ -1,19 +1,42 @@
 class Solution {
 public:
-    int majorityElement(vector<int> &ar)
+    int countInRange(vector<int> &nums, int num, int lo, int hi)
 {
-    unordered_map<int, int> m;
-    int ans = 0;
-    int num = 0;
-    for (int i = 0; i < ar.size(); i++)
+    int count = 0;
+    for (int i = lo; i <= hi; i++)
     {
-        m[ar[i]]++;
-        if (m[ar[i]] > ans)
+        if (nums[i] == num)
         {
-            ans = m[ar[i]];
-            num = ar[i];
+            count++;
         }
     }
-    return num;
+    return count;
+}
+
+int majorityElementRec(vector<int> &nums, int lo, int hi)
+{
+    if (lo == hi)
+    {
+        return nums[lo];
+    }
+
+    int mid = (hi - lo) / 2 + lo;
+    int left = majorityElementRec(nums, lo, mid);
+    int right = majorityElementRec(nums, mid + 1, hi);
+
+    if (left == right)
+    {
+        return left;
+    }
+
+    int leftCount = countInRange(nums, left, lo, hi);
+    int rightCount = countInRange(nums, right, lo, hi);
+
+    return leftCount > rightCount ? left : right;
+}
+
+int majorityElement(vector<int> &nums)
+{
+    return majorityElementRec(nums, 0, nums.size() - 1);
 }
 };
