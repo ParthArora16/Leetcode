@@ -11,42 +11,20 @@
  */
 class Solution {
 public:
-   void inorder(TreeNode *root, vector<int> &ar)
+   bool isSymmetric(TreeNode *left, TreeNode *right)
 {
-    if (root == NULL)
+    if (!left || !right)
     {
-        return;
+        return left == right;
     }
-    ar.push_back(-1);
-    inorder(root->left, ar);
-    ar.push_back(root->val);
-    inorder(root->right, ar);
-    ar.push_back(1);
-}
-
-void reverse_inorder(TreeNode *root, vector<int> &ar)
-{
-    if (root == NULL)
+    if (left->val != right->val)
     {
-        return;
+        return false;
     }
-    ar.push_back(-1);
-    reverse_inorder(root->right, ar);
-    ar.push_back(root->val);
-    reverse_inorder(root->left, ar);
-    ar.push_back(1);
+    return isSymmetric(left->left, right->right) && isSymmetric(left->right, right->left);
 }
-
 bool isSymmetric(TreeNode *root)
 {
-    vector<int> ar1;
-    vector<int> ar2;
-    inorder(root->left, ar1);
-    reverse_inorder(root->right, ar2);
-    if (ar1 == ar2)
-    {
-        return true;
-    }
-    return false;
+    return isSymmetric(root->left, root->right);
 }
 };
