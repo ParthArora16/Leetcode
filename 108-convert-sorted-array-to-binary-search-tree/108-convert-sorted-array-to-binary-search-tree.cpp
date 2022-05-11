@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode *sortedArrayToBST(vector<int> ar, int si, int ei)
+    TreeNode *sortedArrayToBST(vector<int>& ar, int si, int ei)
 {
     if (si > ei)
     {
