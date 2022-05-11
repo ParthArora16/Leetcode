@@ -11,52 +11,50 @@
  */
 class Solution {
 public:
-    TreeNode *buildTree(vector<int> &preorder, int preS, int preE, vector<int> &inorder, int inS, int inE)
+    TreeNode *helper(vector<int> &preorder, int psi, int pei, vector<int> &inorder, int isi, int iei)
 {
-    if (inS > inE)
+    if (isi > iei)
     {
         return NULL;
     }
-    int rootdata;
-    rootdata = preorder[preS];
-    TreeNode *root = new TreeNode(rootdata);
-    int LinS;
-    int LinE;
-    int LpreS;
-    int LpreE;
-    int RinS;
-    int RinE;
-    int RpreS;
-    int RpreE;
+    TreeNode *root = new TreeNode(preorder[psi]);
+    int lpsi;
+    int lpei;
+    int lisi;
+    int liei;
+    int rpsi;
+    int rpei;
+    int risi;
+    int riei;
 
-    LinS = inS;
-    int index = -1;
-    for (int i = inS; i <= inE; i++)
+    lpsi = psi + 1;
+    rpei = pei;
+    lisi = isi;
+    riei = iei;
+
+    int count = 0;
+    for (int i = isi; i <= iei; i++)
     {
-        if (inorder[i] == rootdata)
+        if (inorder[i] == root->val)
         {
-            index = i;
+            count = i;
             break;
         }
     }
-    LinE = index - 1;
-    RinS = index + 1;
-    RinE = inE;
 
-    LpreS = preS + 1;
-    LpreE = LinE - LinS + LpreS;
+    liei = count - 1;
+    risi = count + 1;
 
-    RpreS = LpreE + 1;
-    RpreE = preE;
+    lpei = liei - lisi + lpsi;
+    rpsi = lpei + 1;
 
-    root->left = buildTree(preorder, LpreS, LpreE, inorder, LinS, LinE);
-    root->right = buildTree(preorder, RpreS, RpreE, inorder, RinS, RinE);
-
+    root->left = helper(preorder, lpsi, lpei, inorder, lisi, liei);
+    root->right = helper(preorder, rpsi, rpei, inorder, risi, riei);
     return root;
 }
-
-TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
+    
+    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
 {
-    return buildTree(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+    return helper(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
 }
 };
