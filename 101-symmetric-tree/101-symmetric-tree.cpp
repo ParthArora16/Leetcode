@@ -11,11 +11,15 @@
  */
 class Solution {
 public:
-   bool isSymmetric(TreeNode *left, TreeNode *right)
+bool isSymmetric(TreeNode *left, TreeNode *right)
 {
+    if (left == NULL && right == NULL)
+    {
+        return true;
+    }
     if (left == NULL || right == NULL)
     {
-        return left == right;
+        return false;
     }
     if (left->val != right->val)
     {
