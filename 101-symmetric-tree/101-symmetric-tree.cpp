@@ -11,21 +11,21 @@
  */
 class Solution {
 public:
-bool isSymmetric(TreeNode *left, TreeNode *right)
+    bool isSymmetric(TreeNode *root1, TreeNode *root2)
 {
-    if (left == NULL && right == NULL)
+    if (root1 == NULL && root2 == NULL)
     {
         return true;
     }
-    if (left == NULL || right == NULL)
+    if (root1 == NULL || root2 == NULL)
     {
         return false;
     }
-    if (left->val != right->val)
+    if (root1->val != root2->val)
     {
         return false;
     }
-    return isSymmetric(left->left, right->right) && isSymmetric(left->right, right->left);
+    return isSymmetric(root1->left, root2->right) && isSymmetric(root1->right, root2->left);
 }
 bool isSymmetric(TreeNode *root)
 {
