@@ -1,6 +1,6 @@
 class Solution {
 public:
-void generateParenthesis(int n, int open_count, int closed_count, string s, vector<string>& v)
+void generateParenthesis(int n, int open_count, int closed_count, string& s, vector<string>& v)
 {
     if (open_count == n && closed_count == n)
     {
