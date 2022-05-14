@@ -10,23 +10,22 @@
  */
 class Solution {
 public:
-   void helper(ListNode *head)
-{
-    if (head == NULL || head->next == NULL)
-    {
-        return;
-    }
-    swap(head->val, head->next->val);
-    helper(head->next->next);
-}
-
-ListNode *swapPairs(ListNode *head)
+    ListNode *swapPairs(ListNode *head)
 {
     if (head == NULL || head->next == NULL)
     {
         return head;
     }
-    helper(head);
-    return head;
+
+    ListNode *prev = head;
+    ListNode *curr = NULL;
+
+    while (prev != NULL && prev->next != NULL)
+    {
+        curr = prev->next;
+        swap(prev->val , curr->val);
+        prev = curr->next;
+    }
+        return head;
 }
 };
