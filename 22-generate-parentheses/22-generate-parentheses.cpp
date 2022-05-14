@@ -1,24 +1,24 @@
 class Solution {
 public:
-void generateParenthesis(int n, int openN, int closedN, string s, vector<string>& v)
+void generateParenthesis(int n, int open_count, int closed_count, string s, vector<string>& v)
 {
-    if (openN == n && closedN == n)
+    if (open_count == n && closed_count == n)
     {
         v.push_back(s);
         return;
     }
 
-    if (openN < n)
+    if (open_count < n)
     {
         s.push_back('(');
-        generateParenthesis(n, openN + 1, closedN, s, v);
+        generateParenthesis(n, open_count + 1, closed_count, s, v);
         s.pop_back();
     }
 
-    if (closedN < openN)
+    if (closed_count < open_count)
     {
         s.push_back(')');
-        generateParenthesis(n, openN, closedN + 1, s, v);
+        generateParenthesis(n, open_count, closed_count + 1, s, v);
         s.pop_back();
     }
 }
