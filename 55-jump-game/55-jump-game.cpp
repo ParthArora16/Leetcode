@@ -9,7 +9,7 @@ public:
 
     int n = ei - si + 1;
 
-    if (ar[n] != -2)
+    if (ar[n] != -1)
     {
         return ar[n];
     }
@@ -33,7 +33,7 @@ bool canJump(vector<int> &nums)
     int *ar = new int[n + 1];
     for (int i = 0; i <= n; i++)
     {
-        ar[i] = -2;
+        ar[i] = -1;
     }
     return canJump(nums, 0, nums.size() - 1, ar);
 }
