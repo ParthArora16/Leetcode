@@ -17,7 +17,7 @@ public:
         {
             maxlength = max(maxlength, 2 * closedN);
         }
-        else if (closedN >= openN)
+        else if (closedN > openN)
         {
             openN = closedN = 0;
         }
@@ -37,7 +37,7 @@ public:
         {
             maxlength = max(maxlength, 2 * openN);
         }
-        else if (openN >= closedN)
+        else if (openN > closedN)
         {
             openN = closedN = 0;
         }
