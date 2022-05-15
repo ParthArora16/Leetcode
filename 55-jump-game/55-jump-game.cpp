@@ -1,14 +1,11 @@
 class Solution {
 public:
-    bool canJump(vector<int> &nums, int si, int ei, int *ar)
+    bool canJump(vector<int> &nums, int si, int ei, int *ar, int n)
 {
     if (si == ei)
     {
         return true;
     }
-
-    int n = ei - si + 1;
-
     if (ar[n] != -1)
     {
         return ar[n];
@@ -16,7 +13,7 @@ public:
 
     for (int i = 1; i <= nums[si]; i++)
     {
-        int ans = canJump(nums, si + i, ei , ar);
+        int ans = canJump(nums, si + i, ei , ar , n - i);
         if (ans == true)
         {
             ar[n] = true;
@@ -35,6 +32,6 @@ bool canJump(vector<int> &nums)
     {
         ar[i] = -1;
     }
-    return canJump(nums, 0, nums.size() - 1, ar);
+    return canJump(nums, 0, nums.size() - 1, ar, n);
 }
 };
