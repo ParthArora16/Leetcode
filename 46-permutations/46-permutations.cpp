@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void helper(vector<int> &ar, vector<int> &output, vector<vector<int>> &v, vector<int> &visited)
+   void helper(vector<int> &ar, int si, int ei, vector<int>& output, vector<vector<int>>& v)
 {
     if (output.size() == ar.size())
     {
@@ -8,25 +8,22 @@ public:
         return;
     }
 
-    for (int i = 0; i < ar.size(); i++)
+    for (int i = si; i <= ei; i++)
     {
-        if (visited[i] == -1)
-        {
-            visited[i] = 1;
-            output.push_back(ar[i]);
-            helper(ar , output , v , visited);
-            visited[i] = -1;
-            output.pop_back();
-        }
+        swap(ar[i], ar[si]);
+        output.push_back(ar[si]);
+
+        helper(ar, si + 1, ei, output, v);
+        swap(ar[i], ar[si]);
+        output.pop_back();
     }
 }
 
-vector<vector<int>> permute(vector<int> &nums)
+vector<vector<int>> permute(vector<int> &ar)
 {
-    vector<int> visited(10, -1);
     vector<int> output;
     vector<vector<int>> v;
-    helper(nums, output, v, visited);
+    helper(ar, 0, ar.size() - 1, output, v);
     return v;
 }
 };
