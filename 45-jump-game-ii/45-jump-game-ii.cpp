@@ -16,7 +16,6 @@ public:
         }
         goal = s1.top();
         count++;
-        s1.pop();
     }
     return count;
 }
