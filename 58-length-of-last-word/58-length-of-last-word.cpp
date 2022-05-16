@@ -9,11 +9,11 @@ class Solution {
             while(s[j] == ' '){
                 j--;
             }
-            int counter = 0;
+            int count = 0;
             while(j>=0 && s[j] != ' '){
-                counter++;
+                count++;
                 j--;
             }
-            return counter;
+            return count;
         }
 };
