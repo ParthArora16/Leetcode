@@ -1,16 +1,40 @@
 class Solution {
 public:
-    bool canJump(vector<int> &nums)
+    bool helper(vector<int> &ar, int si, int ei, int *output, int n)
 {
-    int n = nums.size();
-    int last = n - 1;
-    for (int i = n - 2; i >= 0; i--)
+    if (si == ei)
     {
-        if (i + nums[i] >= last)
+        return true;
+    }
+
+    if (output[n] != -1)
+    {
+        return output[n];
+    }
+
+    for (int i = 1; i <= ar[si]; i++)
+    {
+        bool ans = helper(ar, si + i, ei , output , n - i);
+        if (ans == true)
         {
-            last = i;
+            output[n] = true;
+            return output[n];
         }
     }
-    return (last == 0);
+    output[n] = false;
+    return output[n];
+}
+
+bool canJump(vector<int> &ar)
+{
+    int *output = new int[ar.size() + 1];
+    for (int i = 0; i <= ar.size(); i++)
+    {
+        output[i] = -1;
+    }
+    int n = ar.size();
+    bool ans = helper(ar, 0, ar.size() - 1, output, n);
+    delete[] output;
+    return ans;
 }
 };
