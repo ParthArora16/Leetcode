@@ -7,11 +7,12 @@ public:
     {
         ar[i] = new int[n];
     }
-    for (int j = 0; j < n; j++)
+    ar[m- 1][n - 1] = 1;
+    for (int j = 0; j < n - 1; j++)
     {
         ar[m - 1][j] = 1;
     }
-    for (int i = 0; i < m; i++)
+    for (int i = 0; i < m - 1; i++)
     {
         ar[i][n - 1] = 1;
     }
