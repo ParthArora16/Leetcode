@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int minPathSum(vector<vector<int>> &grid)
+   int minPathSum(vector<vector<int>> &grid)
 {
     int m = grid.size();
     int n = grid[0].size();
@@ -19,10 +19,12 @@ public:
     {
         for (int j = n - 2; j >= 0; j--)
         {
-            grid[i][j] = grid[i][j] + min(grid[i + 1][j], grid[i][j + 1]);
+            int op1 = grid[i + 1][j];
+            int op2 = grid[i][j + 1];
+            grid[i][j] = grid[i][j] + min(op1, op2);
         }
     }
+
     return grid[0][0];
 }
-
 };
