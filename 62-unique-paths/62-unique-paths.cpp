@@ -1,28 +1,37 @@
 class Solution {
 public:
-    int uniquePaths(int m, int n)
+    int uniquePaths(int m, int n, int i, int j, int **ar)
+{
+    if (i == m - 1 && j == n - 1)
+    {
+        return 1;
+    }
+
+    if (i >= m || j >= n)
+    {
+        return 0;
+    }
+
+    if (ar[i][j] != -1)
+    {
+        return ar[i][j];
+    }
+
+    ar[i][j] = uniquePaths(m, n, i + 1, j, ar) + uniquePaths(m, n, i, j + 1, ar);
+    return ar[i][j];
+}
+
+int uniquePaths(int m, int n)
 {
     int **ar = new int *[m];
     for (int i = 0; i < m; i++)
     {
         ar[i] = new int[n];
-    }
-    ar[m- 1][n - 1] = 1;
-    for (int j = 0; j < n - 1; j++)
-    {
-        ar[m - 1][j] = 1;
-    }
-    for (int i = 0; i < m - 1; i++)
-    {
-        ar[i][n - 1] = 1;
-    }
-    for (int i = m - 2; i >= 0; i--)
-    {
-        for (int j = n - 2; j >= 0; j--)
+        for (int j = 0; j < n; j++)
         {
-            ar[i][j] = ar[i + 1][j] + ar[i][j + 1];
+            ar[i][j] = -1;
         }
     }
-    return ar[0][0];
+    return uniquePaths(m, n, 0, 0, ar);
 }
 };
