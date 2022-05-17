@@ -1,29 +1,21 @@
 class Solution {
 public:
-    int rob(vector<int> &ar, int si, int ei, int *output, int n)
-{
-    if (si > ei)
-    {
-        return 0;
-    }
-
-    if (output[n] != -1)
-    {
-        return output[n];
-    }
-
-    output[n] = max(rob(ar, si + 2, ei , output , n - 2) + ar[si], rob(ar, si + 1, ei , output , n - 1));
-    return output[n];
-}
-
 int rob(vector<int> &ar)
 {
     int n = ar.size();
-    int *output = new int[n + 1];
-    for (int i = 0; i <= n; i++)
+    if (n == 0)
     {
-        output[i] = -1;
+        return 0;
     }
-    return rob(ar, 0, ar.size() - 1, output, n);
+    int *output = new int[n + 1];
+    output[0] = 0;
+    output[1] = ar[n - 1];
+    for (int i = 2; i <= n; i++)
+    {
+        int op1 = output[i - 2] + ar[n - i];
+        int op2 = output[i - 1];
+        output[i] = max(op1, op2);
+    }
+    return output[n];
 }
 };
