@@ -1,19 +1,19 @@
 class Solution {
 public:
-    int search(vector<int> &nums, int target)
+    int search(vector<int> &ar, int target)
 {
-    int i = 0;
-    int j = nums.size() - 1;
+    int i = 0, j = ar.size() - 1, mid;
     while (i <= j)
     {
-        int mid = (i + j)/ 2;
-        if (nums[mid] == target)
+        mid = (i + j) / 2;
+        if (ar[mid] == target)
         {
             return mid;
         }
-        if (nums[i] <= nums[mid])
+        else if (ar[i] <= ar[mid])
         {
-            if (target >= nums[i] && target <= nums[mid])
+            // left side is sorted
+            if ((ar[i] <= target) && (target < ar[mid]))
             {
                 j = mid - 1;
             }
@@ -24,7 +24,8 @@ public:
         }
         else
         {
-            if (target >= nums[mid] && target <= nums[j])
+            // right part is surely sorted
+            if ((ar[mid] < target) && (target <= ar[j]))
             {
                 i = mid + 1;
             }
