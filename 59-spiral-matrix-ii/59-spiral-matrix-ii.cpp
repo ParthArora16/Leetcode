@@ -1,39 +1,33 @@
 class Solution {
 public:
-vector<vector<int>> generateMatrix(int A) {
-        int left = 0, right = A - 1, top = 0, bottom = A - 1; 
-    vector<vector<int>> mat(A, vector<int>(A));
-    int num = 1;
-    while(left <= right)
+vector<vector<int>> generateMatrix(int n)
+{
+    int left = 0, right = n - 1, top = 0, bottom = n - 1;
+    vector<vector<int>> v(n, vector<int>(n));
+    int data = 1;
+    while (left <= right)
     {
-        //top row
-        for(int i = left; i <= right; i++)
+        for (int j = left; j <= right; j++)
         {
-            mat[top][i] = num; num++;
+            v[top][j] = data++;
         }
         top++;
-        //right col
-        for(int i = top; i <= bottom; i++)
+        for (int i = top; i <= bottom; i++)
         {
-            mat[i][right] = num;
-            num++;
+            v[i][right] = data++;
         }
         right--;
-        //bottom row
-        for(int i = right; i >= left; i--)
+        for (int j = right; j >= left; j--)
         {
-            mat[bottom][i] = num;
-            num++;
+            v[bottom][j] = data++;
         }
         bottom--;
-        //left col
-        for(int i = bottom; i >= top; i--)
+        for (int i = bottom; i >= top; i--)
         {
-            mat[i][left] = num;
-            num++;
+            v[i][left] = data++;
         }
-        left ++;
+        left++;
     }
-    return mat;
-    }
+    return v;
+}
 };
