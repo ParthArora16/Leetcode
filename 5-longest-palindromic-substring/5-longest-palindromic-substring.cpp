@@ -7,6 +7,7 @@ public:
     int fsi = 0;
     int fei = 0;
     int count = 0;
+
     for (int k = 0; k < n - 1; k++)
     {
         int i = k - 1;
@@ -37,7 +38,6 @@ public:
             fsi = i + 1;
             fei = j - 1;
         }
-
         if (s[k] == s[k + 1])
         {
             count = 2;
