@@ -1,8 +1,9 @@
 class Solution {
 public:
-   int longestValidParentheses(string s)
+int longestValidParentheses(string s)
 {
-    int openN = 0, closedN = 0, maxlength = 0;
+    int openN = 0, closedN = 0;
+    int ans = 0;
     for (int i = 0; i < s.length(); i++)
     {
         if (s[i] == '(')
@@ -13,35 +14,37 @@ public:
         {
             closedN++;
         }
+        if (closedN > openN)
+        {
+            openN = 0;
+            closedN = 0;
+        }
         if (openN == closedN)
         {
-            maxlength = max(maxlength, 2 * closedN);
-        }
-        else if (closedN > openN)
-        {
-            openN = closedN = 0;
+            ans = max(ans, 2 * closedN);
         }
     }
     openN = closedN = 0;
     for (int i = s.length() - 1; i >= 0; i--)
     {
-        if (s[i] == '(')
-        {
-            openN++;
-        }
-        else
+        if (s[i] == ')')
         {
             closedN++;
         }
-        if (openN == closedN)
+        else
         {
-            maxlength = max(maxlength, 2 * openN);
+            openN++;
         }
-        else if (openN > closedN)
+        if (openN > closedN)
         {
-            openN = closedN = 0;
+            closedN = 0;
+            openN = 0;
+        }
+        if (closedN == openN)
+        {
+            ans = max(ans, 2 * openN);
         }
     }
-    return maxlength;
+    return ans;
 }
 };
