@@ -1,66 +1,63 @@
 class Solution {
 public:
-    bool isMatch(string s, int n, string p, int m, int **ar)
+    bool isMatch(string s, string p)
 {
-    if (p.length() == 0)
+    int m = s.length();
+    int n = p.length();
+    int **ar = new int *[m + 1];
+    for (int i = 0; i <= m; i++)
     {
-        return s.length() == 0;
+        ar[i] = new int[n + 1];
     }
 
-    // check
-    if (ar[n][m] != -1)
+    // i - s - m
+    // j - p - n
+
+    ar[0][0] = 1;
+
+    for (int i = 1; i <= m; i++)
     {
-        return ar[n][m];
+        ar[i][0] = 0;
     }
 
-    if (p[0] == '*' && p.length() > 1 && p[1] == '*')
+    for (int i = 0; i <= m; i++)
     {
-        ar[n][m] = isMatch(s, n, p.substr(1), m - 1, ar);
-        return ar[n][m];
-    }
-
-    if (p[0] == '*' && p.length() > 1 && s.length() == 0)
-    {
-        return false;
-    }
-
-    if (p[0] == '*')
-    {
-        if (p.length() == 1)
+        for (int j = 1; j <= n; j++)
         {
-            return true;
-        }
-        if (isMatch(s, n, p.substr(1), m - 1, ar))
-        {
-            ar[n][m] = true;
-            return ar[n][m];
-        }
-        ar[n][m] = isMatch(s.substr(1), n - 1, p, m, ar);
-        return ar[n][m];
-    }
-
-    if ((s.length() >= 1) && (p[0] == s[0] || p[0] == '?'))
-    {
-        ar[n][m] = isMatch(s.substr(1), n - 1, p.substr(1), m - 1, ar);
-        return ar[n][m];
-    }
-
-    return false;
-}
-
-bool isMatch(string s, string p)
-{
-    int n = s.length() + 1;
-    int m = p.length() + 1;
-    int **ar = new int *[n];
-    for (int i = 0; i < n; i++)
-    {
-        ar[i] = new int[m];
-        for (int j = 0; j < m; j++)
-        {
-            ar[i][j] = -1;
+            if (p[n - j] == '*')
+            {
+                if (j > 1 && p[n - j + 1] == '*')
+                {
+                    ar[i][j] = ar[i][j - 1];
+                }
+                else if (j == 1)
+                {
+                    ar[i][j] = 1;
+                }
+                else if (ar[i][j - 1])
+                {
+                    ar[i][j] = 1;
+                }
+                else if (i > 1)
+                {
+                    ar[i][j] = ar[i - 1][j];
+                }
+                else
+                {
+                    ar[i][j] = 0;
+                }
+            }
+            else if (i >= 1 && (s[m - i] == p[n - j] || p[n - j] == '?'))
+            {
+                ar[i][j] = ar[i - 1][j - 1];
+            }
+            else
+            {
+                ar[i][j] = 0;
+            }
         }
     }
-    return isMatch(s, n - 1, p, m - 1, ar);
+
+    return ar[m][n];
 }
 };
