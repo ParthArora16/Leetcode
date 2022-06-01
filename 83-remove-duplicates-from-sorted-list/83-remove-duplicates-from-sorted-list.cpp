@@ -10,25 +10,26 @@
  */
 class Solution {
 public:
-    ListNode *deleteDuplicates(ListNode *head)
+ListNode *deleteDuplicates(ListNode *head)
 {
     if (head == NULL || head->next == NULL)
     {
         return head;
     }
-    ListNode *fh = head;
     ListNode *ft = head;
     ListNode *temp = head->next;
+    ListNode *prev = head;
     while (temp != NULL)
     {
-        if (temp->val != ft->val)
+        if (temp->val != prev->val)
         {
-            ft->next = temp;
             ft = ft->next;
+            ft->val = temp->val;
         }
+        prev = temp;
         temp = temp->next;
     }
     ft->next = NULL;
-    return fh;
+    return head;
 }
 };
