@@ -3,10 +3,6 @@ public:
     vector<vector<int>> merge(vector<vector<int>> &v)
 {
     vector<vector<int>> res;
-    if (v.size() == 0)
-    {
-        return res;
-    }
     sort(v.begin(), v.end());
     res.push_back(v[0]);
     int index = 0;
