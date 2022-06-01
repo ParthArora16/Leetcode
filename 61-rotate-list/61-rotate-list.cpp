@@ -10,55 +10,44 @@
  */
 class Solution {
 public:
-int getsize(ListNode *head)
+    ListNode *rotateRight(ListNode *head, int k)
 {
-    if (head == NULL)
-    {
-        return 0;
-    }
-    return getsize(head->next) + 1;
-}
-
-ListNode *rotateRight(ListNode *head, int k)
-{
-   if (head == NULL || head->next == NULL)
+    if (head == NULL || head->next == NULL)
     {
         return head;
     }
-    int n = getsize(head);
-    k = k % n;
+    if(k == 0){
+        return head;
+    }
 
+    ListNode *temp = head;
+    int count = 1;
+    while (temp != NULL && temp->next != NULL)
+    {
+        temp = temp->next;
+        count++;
+    }
+    k %= count;
     if (k == 0)
     {
         return head;
     }
-    
-    ListNode *temp1 = head;
-    ListNode *temp2 = head;
-
+    if (temp != NULL)
+    {
+        temp->next = head;
+    }
     ListNode *fh = NULL;
-
-    int count = 0;
-
-    while (temp2 != NULL && count < k)
+    ListNode *temp2 = head;
+    int n = 0;
+    while (temp2 != NULL && n < count - k - 1)
     {
         temp2 = temp2->next;
-        count++;
-    }
-    while (temp2 != NULL && temp2->next != NULL)
-    {
-        temp2 = temp2->next;
-        temp1 = temp1->next;
-    }
-
-    if (temp1 != NULL)
-    {
-        fh = temp1->next;
-        temp1->next = NULL;
+        n++;
     }
     if (temp2 != NULL)
     {
-        temp2->next = head;
+        fh = temp2->next;
+        temp2->next = NULL;
     }
     return fh;
 }
