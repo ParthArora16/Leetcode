@@ -10,25 +10,56 @@
  */
 class Solution {
 public:
-    ListNode *rotateRight(ListNode *head, int k) {
-        if (head == NULL || head->next == NULL || k == 0) return head;
-        int len = 1;
-        ListNode *tail = head;
+int getsize(ListNode *head)
+{
+    if (head == NULL)
+    {
+        return 0;
+    }
+    return getsize(head->next) + 1;
+}
 
-        /* find the end of list */
-        while (tail->next != NULL) {
-            tail = tail->next;
-            len++;
-        }
-
-        /* form a circle */
-        tail->next = head;
-        k = k % len;
-        for (int i = 0; i < len - k; i++) {
-            tail = tail->next;
-        }
-        head = tail->next;
-        tail->next = NULL;
+ListNode *rotateRight(ListNode *head, int k)
+{
+   if (head == NULL || head->next == NULL)
+    {
         return head;
     }
+    int n = getsize(head);
+    k = k % n;
+
+    if (k == 0)
+    {
+        return head;
+    }
+    
+    ListNode *temp1 = head;
+    ListNode *temp2 = head;
+
+    ListNode *fh = NULL;
+
+    int count = 0;
+
+    while (temp2 != NULL && count < k)
+    {
+        temp2 = temp2->next;
+        count++;
+    }
+    while (temp2 != NULL && temp2->next != NULL)
+    {
+        temp2 = temp2->next;
+        temp1 = temp1->next;
+    }
+
+    if (temp1 != NULL)
+    {
+        fh = temp1->next;
+        temp1->next = NULL;
+    }
+    if (temp2 != NULL)
+    {
+        temp2->next = head;
+    }
+    return fh;
+}
 };
