@@ -1,9 +1,9 @@
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>> &v)
+vector<vector<int>> merge(vector<vector<int>> &v)
 {
-    vector<vector<int>> res;
     sort(v.begin(), v.end());
+    vector<vector<int>> res;
     res.push_back(v[0]);
     int index = 0;
     for (int i = 1; i < v.size(); i++)
