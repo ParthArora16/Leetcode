@@ -1,41 +1,22 @@
 class Solution {
 public:
-    int jump(vector<int> &ar, int si, int ei, int *output)
-{
-        
-    if (si >= ei)
-    {
-        return 0;
-    }
-
-    if (output[si] != -1)
-    {
-        return output[si];
-    }
-
-    int ans = pow(10, 5);
-
-    for (int i = 1; i <= ar[si]; i++)
-    {
-        int smallans = jump(ar, i + si, ei, output) + 1;
-        ans = min(ans, smallans);
-    }
-
-    output[si] = ans;
-    return output[si];
-}
-
-int jump(vector<int> &ar)
+    int jump(vector<int> &ar)
 {
     int n = ar.size();
     int *output = new int[n];
-    for (int i = 0; i < n; i++)
+    output[n - 1] = 0;
+    for (int i = n - 2; i >= 0; i--)
     {
-        output[i] = -1;
+        int ans = pow(10, 5);
+        for (int j = 1; (i + j) < n && j <= ar[i]; j++)
+        {
+            
+            int smallans = output[i + j] + 1;
+            ans = min(smallans, ans);
+        }
+        output[i] = ans;
     }
-    // ar[i] -> from ith elements min jumps.
-    // final ans -> ar[0];
-
-    return jump(ar, 0, ar.size() - 1, output);
+    return output[0];
 }
+
 };
