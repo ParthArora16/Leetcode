@@ -1,63 +1,65 @@
 class Solution {
 public:
-    bool isMatch(string s, string p)
+bool isMatch(string s, string p, int m, int n, vector<vector<int>> &output)
 {
-    int m = s.length();
-    int n = p.length();
-    int **ar = new int *[m + 1];
-    for (int i = 0; i <= m; i++)
+    if (p.length() == 0)
     {
-        ar[i] = new int[n + 1];
+        return s.length() == 0;
     }
 
-    // i - s - m
-    // j - p - n
-
-    ar[0][0] = 1;
-
-    for (int i = 1; i <= m; i++)
+    if (output[m][n] != -1)
     {
-        ar[i][0] = 0;
+        return output[m][n];
     }
 
-    for (int i = 0; i <= m; i++)
+    if (p[0] == '*' && p.length() > 1 && p[1] == '*')
     {
-        for (int j = 1; j <= n; j++)
+        output[m][n] = isMatch(s, p.substr(1), m, n - 1, output);
+        return output[m][n];
+    }
+
+    if (p[0] == '*')
+    {
+        if (isMatch(s, p.substr(1), m, n - 1, output))
         {
-            if (p[n - j] == '*')
+            output[m][n] = 1;
+            return output[m][n];
+        }
+
+        else if (s.length() <= 1)
+        {
+            if (p.length() > 1)
             {
-                if (j > 1 && p[n - j + 1] == '*')
-                {
-                    ar[i][j] = ar[i][j - 1];
-                }
-                else if (j == 1)
-                {
-                    ar[i][j] = 1;
-                }
-                else if (ar[i][j - 1])
-                {
-                    ar[i][j] = 1;
-                }
-                else if (i > 1)
-                {
-                    ar[i][j] = ar[i - 1][j];
-                }
-                else
-                {
-                    ar[i][j] = 0;
-                }
-            }
-            else if (i >= 1 && (s[m - i] == p[n - j] || p[n - j] == '?'))
-            {
-                ar[i][j] = ar[i - 1][j - 1];
+                output[m][n] = 0;
+                return output[m][n];
             }
             else
             {
-                ar[i][j] = 0;
+                output[m][n] = 1;
+                return true;
             }
         }
+
+        else
+        {
+            output[m][n] = isMatch(s.substr(1), p, m - 1, n, output);
+        }
+        return output[m][n];
     }
 
-    return ar[m][n];
+    if (s.length() >= 1 && ((s[0] == p[0]) || p[0] == '?'))
+    {
+        output[m][n] = isMatch(s.substr(1), p.substr(1), m - 1, n - 1, output);
+        return output[m][n];
+    }
+    output[m][n] = false;
+    return false;
+}
+bool isMatch(string s, string p)
+{
+    int m = s.length();
+    int n = p.length();
+    vector<vector<int>> output(m + 1, vector<int>(n + 1, -1));
+    return isMatch(s, p, m, n, output);
 }
 };
